@@ -5,8 +5,8 @@
 
 export const site = {
   name: "Nuel Edeh",
-  title: "Product Manager",
-  tagline: "Security · Infrastructure · Growth · B2B SaaS",
+  title: "Product Manager · AI Builder",
+  tagline: "Building platforms at scale. Shipping AI agents. Thinking in systems.",
   description:
     "PM who has shipped platform products at scale — from 60–80B daily DNS events at Cloudflare to product-led growth at a co-founded startup. Interested in the psychology of product decisions as much as the infrastructure underneath them.",
   email: "nueledeh92@gmail.com",
@@ -16,9 +16,9 @@ export const site = {
 };
 
 export const about = {
-  headline: "I build products at the intersection of infrastructure, security, and human behaviour.",
+  headline: "I build PM-led products and AI agents at the intersection of infrastructure, security, and human behaviour.",
   body: [
-    "I've spent my career at the edge of technical complexity and business outcomes — owning platforms that process billions of requests a day, closing enterprise deals by translating architecture into features, and driving alignment from engineering to the C-suite.",
+    "I'm a Product Manager and AI builder with 6+ years of experience — spanning enterprise consulting, 0→1 product, and large-scale security infrastructure. I also build things: I'm AI-native by practice — I shipped a production MCP agent at Cloudflare and designed a second.",
     "At Cloudflare I owned the full DNS Security and Secure Web Gateway portfolio — spanning threat intelligence, L3–L7 inspection, policy enforcement, and Zero Trust network access — growing ARR 2.3× in under two years. I delivered FedRAMP High compliance uplift across multiple product lines, shipped a production MCP agent, and scoped a second agent for sales intelligence. I believe PMs should build things, not just describe them.",
     "I've read Rory Sutherland's Alchemy four times. I've been a Wealthsimple user since 2017. I care about the behavioural layer underneath every product decision as much as the system design above it.",
     "I'm currently exploring my next PM role — open to security, infrastructure, growth, and fintech platforms.",

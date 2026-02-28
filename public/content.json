@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Nuel Edeh",
-    "title": "Product Manager",
-    "tagline": "Building platforms at scale. Thinking in systems. Obsessed with why people do what they do.",
+    "title": "Product Manager · AI Builder",
+    "tagline": "Building platforms at scale. Shipping AI agents. Thinking in systems.",
     "email": "hello@nueledeh.com",
     "linkedin": "https://www.linkedin.com/in/eedeh/",
     "github": "https://github.com/nueledeh",
     "location": "Toronto, Canada",
     "openToWork": true,
-    "openToWorkNote": "Available for Senior / Principal PM roles in security, infrastructure, growth, or fintech."
+    "openToWorkNote": "Available for Senior / Principal PM and AI product roles in security, infrastructure, growth, or fintech."
   },
-  "about": "I'm a Product Manager with 6+ years building enterprise-grade security and network infrastructure products at scale. At Cloudflare I owned the full DNS Security portfolio — spanning threat intelligence, L3–L7 traffic inspection, policy enforcement, and Zero Trust network access — growing ARR 2.3× and scaling to 60–80B daily events. I operate at portfolio breadth: connecting work across product teams, surfacing architectural risk, shaping GTM strategy, and driving alignment from engineering to the C-suite. I delivered FedRAMP High compliance uplift across multiple product lines. I also build things: I'm AI-native by practice — I shipped a production MCP agent at Cloudflare and designed a second. I think a lot about why people make the decisions they do — I've read Rory Sutherland's Alchemy four times. I'm introspective by nature, pragmatic by default, and biased toward shipping.",
+  "about": "I'm a Product Manager and AI builder with 6+ years of experience — spanning enterprise consulting, 0→1 product, and large-scale security infrastructure. I also build things: I'm AI-native by practice — I shipped a production MCP agent at Cloudflare and designed a second. At Cloudflare I owned the full DNS Security portfolio — spanning threat intelligence, L3–L7 traffic inspection, policy enforcement, and Zero Trust network access — growing ARR 2.3× and scaling to 60–80B daily events. I operate at portfolio breadth: connecting work across product teams, surfacing architectural risk, shaping GTM strategy, and driving alignment from engineering to the C-suite. I delivered FedRAMP High compliance uplift across multiple product lines. I think a lot about why people make the decisions they do — I've read Rory Sutherland's Alchemy four times. I'm introspective by nature, pragmatic by default, and biased toward shipping.",
   "experience": [
     {
       "title": "Product Manager",
