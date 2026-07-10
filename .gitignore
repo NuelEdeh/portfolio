@@ -1,5 +1,7 @@
 .wrangler/
-.claude/
 .DS_Store
 node_modules/
 *.local
+
+# Track .claude/skills and .claude/commands, but not machine-local settings
+.claude/settings.local.json
