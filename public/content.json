@@ -1,139 +1,173 @@
 {
   "meta": {
     "name": "Nuel Edeh",
-    "title": "Product Manager · AI Builder",
-    "tagline": "Building platforms at scale. Shipping AI agents. Thinking in systems.",
+    "title": "Product Manager · AI Builder · Writer",
+    "eyebrow": "Product Manager · AI Builder · Writer",
+    "tagline": "An engineer's rigor with a writer's eye.",
     "email": "hello@nueledeh.com",
     "linkedin": "https://www.linkedin.com/in/eedeh/",
     "github": "https://github.com/nueledeh",
     "location": "Toronto, Canada",
     "openToWork": true,
-    "openToWorkNote": "Available for Senior / Principal PM and AI product roles in security, infrastructure, growth, or fintech."
+    "availability": "Available — Senior / Principal PM · AI Product"
   },
-  "about": "I'm a Product Manager and AI builder with 6+ years of experience — spanning enterprise consulting, 0→1 product, and large-scale security infrastructure. I also build things: I'm AI-native by practice — I shipped a production MCP agent at Cloudflare and designed a second. At Cloudflare I owned the full DNS Security portfolio — spanning threat intelligence, L3–L7 traffic inspection, policy enforcement, and Zero Trust network access — growing ARR 2.3× and scaling to 60–80B daily events. I operate at portfolio breadth: connecting work across product teams, surfacing architectural risk, shaping GTM strategy, and driving alignment from engineering to the C-suite. I delivered FedRAMP High compliance uplift across multiple product lines. I think a lot about why people make the decisions they do — I've read Rory Sutherland's Alchemy four times. I'm introspective by nature, pragmatic by default, and biased toward shipping.",
-  "experience": [
+  "hero": {
+    "name": "Nuel",
+    "nameAccent": "Edeh",
+    "typewriter": [
+      "I build platforms at scale.",
+      "I ship AI agents people actually use.",
+      "I think in systems.",
+      "I write to figure out what I think."
+    ],
+    "paragraph": "An engineer's rigor with a writer's eye — six years turning hard, systemic problems into products people trust. I ship, I scale, and I write my way through the thinking."
+  },
+  "stats": [
     {
-      "title": "Product Manager",
-      "company": "Cloudflare",
-      "location": "Remote",
-      "period": "Feb 2024 – Jan 2026",
-      "tags": [
-        "DNS Security",
-        "Zero Trust",
-        "B2B SaaS",
-        "Enterprise"
-      ],
-      "summary": "Owned DNS Filtering & Secure Web Gateway — the Zero Trust on-ramp processing 60–80B daily events across enterprise, ISP, and SMB segments — from strategy through delivery.",
-      "highlights": [
-        "Grew product ARR 2.3× in under two years, scaling Gateway DNS from ~35B to 60–80B requests/day through 20+ enterprise feature launches",
-        "Delivered FedRAMP High compliance uplift across multiple product lines — partnering across product, legal, security, and engineering to unlock regulated enterprise and government accounts",
-        "Sponsored $4.6M TCV in named enterprise deals — identified customer-specific security and architectural requirements and drove delivery to clear procurement blockers across enterprise, government, and Fortune 500 accounts",
-        "Shipped a production AI agent using MCP servers — a knowledge base agent indexing internal wikis and codebases, highlighted by a senior technical leader as a flagship example. Scoped and architected a second agent for real-time customer intelligence across CRM, observability, and collaboration tools.",
-        "Led analyst engagement earning Leader & Top Innovator in the 2026 GigaOm DNS Security Radar; launched the 2026 ISP and channel sales play cementing the product as the Zero Trust platform anchor",
-        "Identified upstream identity processing as a throughput bottleneck — surfaced retry storm risk and cross-dependency failures, contributed to architectural mitigations across multiple platform-impacting incidents",
-        "Owned all customer-facing incident communications — translated resolver degradation, colo overload, and tunnel failures into clear narratives, protecting a large DNS reseller processing billions of daily queries"
-      ]
+      "count": 2.3,
+      "decimals": 1,
+      "unit": "×",
+      "meter": 82,
+      "label": "ARR growth",
+      "context": "Cloudflare · in under two years"
     },
     {
-      "title": "Co-founder & Head of Product",
-      "company": "Neat",
-      "location": "Toronto",
-      "period": "May 2020 – Jan 2024",
-      "tags": [
-        "Consumer SaaS",
-        "Product-led Growth",
-        "Developer Tools"
-      ],
-      "summary": "Co-founded a GitHub notifications manager for software developers. Built 0→1, owned product, GTM, and developer relations.",
-      "highlights": [
-        "Scaled to 3.96K+ DAUs with a 10× increase in user engagement",
-        "Drove 62% usage growth and 5× retention improvement through product-led growth and behavioural design",
-        "Generated $120K+ in development services revenue from SMB customers",
-        "Completed API integrations with GitHub and Linear"
-      ]
+      "count": 80,
+      "decimals": 0,
+      "unit": "B",
+      "meter": 100,
+      "label": "Daily DNS events",
+      "context": "Gateway DNS · at peak, and climbing",
+      "live": true
     },
     {
-      "title": "Senior Consultant, Risk Assurance",
-      "company": "PwC Canada",
-      "location": "Toronto",
-      "period": "Sept 2020 – Feb 2023",
-      "tags": [
-        "Cybersecurity",
-        "Risk",
-        "Consulting"
-      ],
-      "summary": "Led cross-functional team delivering cybersecurity risk assessments for enterprise clients.",
-      "highlights": [
-        "Led a 5-person cross-functional team delivering cybersecurity risk assessments for 9 enterprise clients in financial services and critical infrastructure with >80% on-time delivery",
-        "Delivered $360K in annual savings through compliance process automation across multi-million-dollar client programmes"
-      ]
+      "count": 4.6,
+      "decimals": 1,
+      "prefix": "$",
+      "tail": "M",
+      "meter": 64,
+      "label": "Enterprise TCV sponsored",
+      "context": "Enterprise · government · Fortune 500"
     }
   ],
+  "aboutLead": "I'm happiest where rigor meets curiosity. At Cloudflare I owned the full DNS Security portfolio — threat intelligence, L3–L7 inspection, policy enforcement, Zero Trust access — growing ARR 2.3× while scaling to 60–80B daily events.",
+  "about": "AI-native by practice: I shipped a production MCP agent and architected a second. I connect work across teams, surface architectural risk, and drive alignment from engineering to the C-suite. People describe me as calm, curious, and a little relentless — I think a lot about why people decide the way they do (I've read Rory Sutherland's Alchemy four times).",
   "skills": [
     "Platform & Systems Thinking",
-    "0→1 Product Delivery",
-    "Zero Trust / Network Security",
-    "FedRAMP & Regulatory Compliance",
-    "Threat Intelligence Productization",
-    "Product-led Growth",
-    "Behavioural Product Design",
-    "Enterprise GTM",
-    "Cross-functional Leadership",
-    "Incident Leadership & Comms",
     "AI Agent Design (MCP / LLMs)",
-    "Analyst Relations",
-    "Grafana · BigQuery · SQL",
-    "Amplitude",
-    "Salesforce",
-    "API & Systems Design"
+    "Zero Trust / Network Security",
+    "FedRAMP & Compliance",
+    "0→1 Product Delivery",
+    "Enterprise GTM",
+    "Behavioural Product Design"
+  ],
+  "experience": [
+    {
+      "company": "Cloudflare",
+      "role": "Product Manager · DNS Security & Secure Web Gateway",
+      "period": "Feb 2024 — Jan 2026",
+      "summary": "Owned DNS Filtering & SWG — the Zero Trust on-ramp processing 60–80B daily events across enterprise, ISP, and SMB — from strategy through delivery.",
+      "highlights": [
+        "Grew ARR 2.3× in under two years; scaled Gateway DNS from ~35B to 60–80B requests/day via 20+ enterprise launches.",
+        "Shipped a production MCP knowledge agent — flagged by a senior technical leader as a flagship example — and architected a second for real-time customer intelligence.",
+        "Delivered FedRAMP High uplift across product lines; sponsored $4.6M TCV in named enterprise, government & Fortune 500 deals."
+      ]
+    },
+    {
+      "company": "Neat",
+      "role": "Co-founder & Head of Product · Developer Tools",
+      "period": "May 2020 — Jan 2024",
+      "summary": "Co-founded a GitHub notifications manager for developers. Built 0→1, owned product, GTM, and dev relations.",
+      "highlights": [
+        "Scaled to 3.96K+ DAUs with a 10× increase in engagement; 5× retention improvement.",
+        "Generated $120K+ in development-services revenue; shipped GitHub & Linear integrations."
+      ]
+    },
+    {
+      "company": "PwC Canada",
+      "role": "Senior Consultant · Risk Assurance",
+      "period": "Sep 2020 — Feb 2023",
+      "summary": "Led a 5-person team delivering cybersecurity risk assessments for 9 enterprise clients; drove $360K annual savings through compliance automation.",
+      "highlights": []
+    }
   ],
   "posts": [
     {
-      "slug": "valentines-in-the-modern-era",
-      "title": "Valentine's Day, the sun, and a cat called Oona",
-      "date": "2026-02-14",
-      "tags": [
-        "Life",
-        "Reflection"
-      ],
-      "excerpt": "Instagram is full of couples today. I'm on my Queen Street rooftop with coffee, sativa, and questions I don't have answers to yet. Also: photons.",
-      "body": "Instagram is full of couples today. Carefully curated, or faux-silly — everyone performing love for the feed. I used to do this too.\n\nInstead I'm on my Queen Street rooftop. Coffee. Sativa. Sun. The fog this combination creates is useful — it softens the sharp edges of things. Feelings. Thoughts. The unpleasantness we all carry but rarely sit with.\n\nMy friend V ran us through a sun ritual this morning. Simple: stand in it. Let it soak you. Then she started talking about photons — 678 quadrillion of them per square inch per second, racing 93 million miles in 8.5 minutes. Massless. Chargeless. Both wave and particle. They drive photosynthesis, colour, that feeling of warmth on your skin. Pure energy, delivered for free, without prejudice. All you have to do is show up and receive.\n\nI keep thinking about that. Show up. Receive.\n\nShe mapped the chakras onto wavelengths of light: root chakra red at 630nm, through to crown violet at the top. Whether you believe the chakra part or not, sitting in the sun and thinking about light this way hit differently.\n\nThen I came home to Oona.\n\nWe adopted her in April 2022 when I was alone over the holidays, deep winter, middle of lockdown. She was born November 2021 and named \"Candy\" by the shelter — a funny and terrible name for a cat. I renamed her Oona.\n\nWe didn't always get along. My ego wanted to establish hierarchy. She made it abundantly clear she answers to no such thing. She's truer to her instincts than any power game I tried to run. Eventually I yielded. We became friends.\n\nThese days she cuddles up next to me when I sleep. Visits when I call. Patiently waits when I serve breakfast at 11am. A gentle lady who still knows how to set a boundary.\n\nI never thought I'd be a cat dad. But on this Valentine's Day, the love I'm celebrating is hers.\n\nHappy Valentine's Day, Popoon."
+      "slug": "building-ai-agents-at-cloudflare",
+      "title": "Building AI agents at Cloudflare: what actually worked",
+      "date": "2026-01-15",
+      "dateLabel": "2026.01.15",
+      "label": "AI / MCP",
+      "featured": true,
+      "tags": ["AI", "MCP", "Agents", "Product"],
+      "excerpt": "The agents that get adopted aren't the most capable — they're the ones that replace one painful task so reliably people stop thinking about them.",
+      "body": "I built a production MCP agent during my time at Cloudflare, and scoped a second. Here's what I learned about what makes an agent actually useful versus impressive.\n\nThe first agent — the one we shipped — indexed internal wikis, the codebase, API docs, and architecture diagrams to answer cross-platform technical questions. It replaced hours of context-gathering with a reliable shortcut that engineering and PM teams started using daily.\n\nThe second agent I scoped and architected: it would pull customer data from our CRM, usage metrics from Grafana, and market signals to give sales teams a live brief on account health before conversations. I got deep into the data model and tooling design before I left, but it wasn't shipped during my tenure.\n\nWhat I noticed from the first agent: the agents that get adopted aren't the ones with the most impressive capabilities. They're the ones that replace a specific, painful, repetitive task with a reliable shortcut. People didn't care about the architecture. They cared that they could stop spending 20 minutes before every call compiling context.\n\nThe lesson: the best AI agent isn't the one that can do the most — it's the one that does one thing so reliably that people stop thinking about it and just use it. Tool design and reliability beat capability breadth every time.\n\nThe second lesson: the hardest part of agent development isn't the model or the tooling. It's the data quality and retrieval. Our knowledge agent was only as good as how well our internal docs were maintained. Garbage in, garbage out — no matter how good the LLM."
     },
     {
       "slug": "alchemy-and-product",
       "title": "What Rory Sutherland taught me about product decisions",
       "date": "2025-12-10",
-      "tags": [
-        "Product Thinking",
-        "Behavioural Design"
-      ],
-      "excerpt": "I've read Alchemy four times. Each time I find something new that changes how I think about why features succeed or fail — and it's rarely the thing you'd optimise for.",
+      "dateLabel": "2025.12.10",
+      "label": "Behavioural",
+      "tags": ["Product Thinking", "Behavioural Design"],
+      "excerpt": "Logic is a terrible guide to human behaviour — and to funnels.",
       "body": "I've read Alchemy four times. Each time I find something new that changes how I think about why features succeed or fail — and it's rarely the thing you'd optimise for.\n\nSutherland's central argument is that logic is a terrible guide to human behaviour. People don't make decisions on utility — they make them on perception, context, and irrational signals that logic would dismiss. The book is full of examples where the 'logical' solution was wrong and an 'illogical' one worked brilliantly.\n\nThe lesson I keep coming back to in product work: before you optimise a funnel, ask whether the funnel is actually what's driving the behaviour you want. Often it isn't. The friction isn't in the UI — it's in the signal the UI is sending.\n\nWhen I was at Neat, we had a retention problem. The 'logical' fix was to improve onboarding. We tried that. It didn't move the number. What moved it was adding a single social proof element at exactly the right moment — not because it added information, but because it changed the psychological context of the decision. That's Sutherland in practice.\n\nThe same principle applied at Cloudflare. Some of our best feature adoption came not from making things easier, but from making them feel more intentional and powerful. Enterprise buyers aren't just buying function — they're buying confidence. The signal you send about your product matters as much as the product itself."
-    },
-    {
-      "slug": "building-ai-agents-at-cloudflare",
-      "title": "Building AI agents at Cloudflare: what actually worked",
-      "date": "2026-01-15",
-      "tags": [
-        "AI",
-        "MCP",
-        "Agents",
-        "Product"
-      ],
-      "excerpt": "I built a production MCP agent during my time at Cloudflare, and scoped a second. Here's what I learned about what makes an agent actually useful versus impressive.",
-      "body": "I built a production MCP agent during my time at Cloudflare, and scoped a second. Here's what I learned about what makes an agent actually useful versus impressive.\n\nThe first agent — the one we shipped — indexed internal wikis, the codebase, API docs, and architecture diagrams to answer cross-platform technical questions. It replaced hours of context-gathering with a reliable shortcut that engineering and PM teams started using daily.\n\nThe second agent I scoped and architected: it would pull customer data from our CRM, usage metrics from Grafana, and market signals to give sales teams a live brief on account health before conversations. I got deep into the data model and tooling design before I left, but it wasn't shipped during my tenure.\n\nWhat I noticed from the first agent: the agents that get adopted aren't the ones with the most impressive capabilities. They're the ones that replace a specific, painful, repetitive task with a reliable shortcut. People didn't care about the architecture. They cared that they could stop spending 20 minutes before every call compiling context.\n\nThe lesson: the best AI agent isn't the one that can do the most — it's the one that does one thing so reliably that people stop thinking about it and just use it. Tool design and reliability beat capability breadth every time.\n\nThe second lesson: the hardest part of agent development isn't the model or the tooling. It's the data quality and retrieval. Our knowledge agent was only as good as how well our internal docs were maintained. Garbage in, garbage out — no matter how good the LLM."
     },
     {
       "slug": "dns-security-primer",
       "title": "DNS security for PMs: what you actually need to know",
       "date": "2025-09-01",
-      "tags": [
-        "DNS",
-        "Security",
-        "Zero Trust"
-      ],
-      "excerpt": "Most PM resources on DNS security are either too shallow or too technical. This is the version I wish I'd had when I joined Cloudflare.",
+      "dateLabel": "2025.09.01",
+      "label": "Security",
+      "tags": ["DNS", "Security", "Zero Trust"],
+      "excerpt": "Start with the buyer's anxiety, not the technology.",
       "body": "Most PM resources on DNS security are either too shallow or too technical. This is the version I wish I'd had when I joined Cloudflare.\n\nDNS is the phone book of the internet. When you type a domain, your device asks a DNS resolver: 'what IP address does this map to?' That lookup happens before any connection is made — which means it's one of the best places to enforce security policy.\n\nDNS filtering works by intercepting those queries and applying rules: block this category, allow that domain, flag this pattern. At Cloudflare, we did this at L3/L4 (network layer) and L7 (application layer), giving enterprise customers granular control over what traffic enters and leaves their networks.\n\nThe PM insight that took me a while to learn: DNS security isn't just about blocking bad sites. For enterprise customers, it's about visibility and policy enforcement across a distributed workforce. The 'block' is almost secondary to the audit log, the analytics, and the ability to prove compliance. That's what CISOs actually buy.\n\nIf you're moving into security PM from another domain: start with the buyer's anxiety, not the technology. The technology is learnable in weeks. Understanding why a CISO loses sleep — and how your product changes that equation — takes longer and matters more."
+    },
+    {
+      "slug": "valentines-in-the-modern-era",
+      "title": "Valentine's Day, the sun, and a cat called Oona",
+      "date": "2026-02-14",
+      "dateLabel": "2026.02.14",
+      "label": "Life",
+      "tags": ["Life", "Reflection"],
+      "excerpt": "Coffee, sun, 678 quadrillion photons, and a gentle lady.",
+      "body": "Instagram is full of couples today. Carefully curated, or faux-silly — everyone performing love for the feed. I used to do this too.\n\nInstead I'm on my Queen Street rooftop. Coffee. Sativa. Sun. The fog this combination creates is useful — it softens the sharp edges of things. Feelings. Thoughts. The unpleasantness we all carry but rarely sit with.\n\nMy friend V ran us through a sun ritual this morning. Simple: stand in it. Let it soak you. Then she started talking about photons — 678 quadrillion of them per square inch per second, racing 93 million miles in 8.5 minutes. Massless. Chargeless. Both wave and particle. They drive photosynthesis, colour, that feeling of warmth on your skin. Pure energy, delivered for free, without prejudice. All you have to do is show up and receive.\n\nI keep thinking about that. Show up. Receive.\n\nShe mapped the chakras onto wavelengths of light: root chakra red at 630nm, through to crown violet at the top. Whether you believe the chakra part or not, sitting in the sun and thinking about light this way hit differently.\n\nThen I came home to Oona.\n\nWe adopted her in April 2022 when I was alone over the holidays, deep winter, middle of lockdown. She was born November 2021 and named \"Candy\" by the shelter — a funny and terrible name for a cat. I renamed her Oona.\n\nWe didn't always get along. My ego wanted to establish hierarchy. She made it abundantly clear she answers to no such thing. She's truer to her instincts than any power game I tried to run. Eventually I yielded. We became friends.\n\nThese days she cuddles up next to me when I sleep. Visits when I call. Patiently waits when I serve breakfast at 11am. A gentle lady who still knows how to set a boundary.\n\nI never thought I'd be a cat dad. But on this Valentine's Day, the love I'm celebrating is hers.\n\nHappy Valentine's Day, Popoon."
+    },
+    {
+      "slug": "psychological-safety-innovative-behaviour",
+      "title": "Psychological safety and innovative behaviour",
+      "date": "2020-01-01",
+      "dateLabel": "2020",
+      "label": "Neat · Leadership",
+      "tags": ["Leadership", "Teams"],
+      "url": "https://medium.com/neat-blog/psychological-safety-needed-for-innovative-behaviour-12cadb4f8805",
+      "revisited": true,
+      "excerpt": "Inclusive leaders build trust by going first — admitting what they don't know.",
+      "reflection": "Looking back — the teams and the AI agents I build now still start here: make it safe to be wrong, and better thinking shows up."
+    },
+    {
+      "slug": "a-simpler-approach-to-work",
+      "title": "A simpler approach to work",
+      "date": "2022-01-01",
+      "dateLabel": "2022",
+      "label": "Neat · Craft",
+      "tags": ["Craft", "Focus"],
+      "url": "https://neat.run/blog/simplicity-at-work",
+      "revisited": true,
+      "excerpt": "Six practices for focus in a time of change, chaos, and information overload.",
+      "reflection": "Looking back — this became my rule for agents: do one thing so reliably that people stop thinking about it."
+    },
+    {
+      "slug": "running-stand-ups-people-dont-hate",
+      "title": "Running stand-ups that people don't hate",
+      "date": "2023-01-01",
+      "dateLabel": "2023",
+      "label": "Neat · Teams",
+      "tags": ["Teams", "Process"],
+      "url": "https://neat.run/blog/daily-stand-ups",
+      "revisited": true,
+      "excerpt": "Seven practices for distributed teams — short, async-first, and actually human.",
+      "reflection": "Looking back — the same async, low-ceremony rhythm I carried into shipping at Cloudflare scale."
     }
   ]
 }
