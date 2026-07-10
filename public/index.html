@@ -473,6 +473,38 @@
     .reader-body { font-size: 17px; line-height: 1.8; color: var(--ink-3); }
     .reader-body p { margin-bottom: 1.5rem; }
     .reader-body p:last-child { margin-bottom: 0; }
+    .reader-body strong { font-weight: 500; color: var(--ink); }
+    .reader-body em { font-style: italic; }
+    /* Section headings inside a post */
+    .reader-body h3 {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.75rem 0 1.1rem;
+    }
+    .reader-body h3:first-child { margin-top: 0; }
+    /* Skimmable takeaway — the one line a fast reader should catch */
+    .reader-body mark.hl {
+      background: linear-gradient(transparent 62%, rgba(181, 80, 46, 0.18) 62%);
+      color: inherit;
+      padding: 0 0.05em;
+      font-weight: 400;
+    }
+    /* Pull quote */
+    .reader-body blockquote {
+      margin: 2rem 0;
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--accent);
+      font-family: var(--serif);
+      font-optical-sizing: auto;
+      font-style: italic;
+      font-size: 1.35em;
+      line-height: 1.4;
+      color: var(--ink-2);
+    }
 
     /* ============================================================
        CONTACT
@@ -891,6 +923,41 @@
       }
     }
 
+    /* ---------- lightweight markdown (reader bodies) ----------
+       Supports, per blank-line block:
+         ## Heading            → section label
+         > Pull quote          → blockquote
+         paragraph text        → <p>
+       Inline: **bold**, *italic*, ==highlight== (skimmable takeaway).
+       Plain-text bodies (no markers) pass straight through unchanged. */
+    function mdInline(raw) {
+      let s = esc(raw);
+      s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      s = s.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, '$1<em>$2</em>');
+      s = s.replace(/==([^=]+)==/g, '<mark class="hl">$1</mark>');
+      return s;
+    }
+    function renderPostBody(container, body) {
+      container.innerHTML = '';
+      body.split(/\n\n+/).forEach(block => {
+        const b = block.trim();
+        if (!b) return;
+        if (b.slice(0, 3) === '## ') {
+          const h = el('h3');
+          h.innerHTML = mdInline(b.slice(3).trim());
+          container.appendChild(h);
+        } else if (b[0] === '>') {
+          const q = el('blockquote');
+          q.innerHTML = mdInline(b.replace(/^>\s?/gm, '').trim());
+          container.appendChild(q);
+        } else {
+          const p = el('p');
+          p.innerHTML = mdInline(b);
+          container.appendChild(p);
+        }
+      });
+    }
+
     /* ---------- reading view ---------- */
     function openReader(slug) {
       const p = postsBySlug[slug];
@@ -903,9 +970,7 @@
       tags.innerHTML = '';
       (p.tags || []).forEach(t => tags.appendChild(el('span', 'reader-tag', t)));
 
-      const body = document.getElementById('reader-body');
-      body.innerHTML = '';
-      (p.body || '').split(/\n\n+/).forEach(para => body.appendChild(el('p', null, para)));
+      renderPostBody(document.getElementById('reader-body'), p.body || '');
 
       document.getElementById('main').classList.add('hidden');
       document.getElementById('reader').classList.add('active');
