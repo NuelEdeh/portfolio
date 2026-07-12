@@ -20,7 +20,7 @@
       "I think in systems.",
       "I write to figure out what I think."
     ],
-    "paragraph": "An engineer's rigor with a writer's eye — six years turning hard, systemic problems into products people trust. I ship, I scale, and I write my way through the thinking."
+    "paragraph": "An engineer's rigor with a writer's eye. Six years turning hard, systemic problems into products people trust. I ship, I scale, and I write my way through the thinking."
   },
   "stats": [
     {
@@ -50,8 +50,8 @@
       "context": "Enterprise · government · Fortune 500"
     }
   ],
-  "aboutLead": "I'm happiest where rigor meets curiosity. At Cloudflare I owned the full DNS Security portfolio — threat intelligence, L3–L7 inspection, policy enforcement, Zero Trust access — growing ARR 2.3× while scaling to 60–80B daily events.",
-  "about": "AI-native by practice: I shipped a production MCP agent and architected a second. I connect work across teams, surface architectural risk, and drive alignment from engineering to the C-suite. People describe me as calm, curious, and a little relentless — I think a lot about why people decide the way they do (I've read Rory Sutherland's Alchemy four times).",
+  "aboutLead": "I'm happiest where rigor meets curiosity. At Cloudflare I owned the full DNS Security portfolio: threat intelligence, L3–L7 inspection, policy enforcement, and Zero Trust access. Grew ARR 2.3× while scaling to 60–80B daily events.",
+  "about": "AI-native by practice: I shipped a production MCP agent and architected a second. I connect work across teams, surface architectural risk, and drive alignment from engineering to the C-suite. People describe me as calm, curious, and a little relentless. I think a lot about why people decide the way they do (I've read Rory Sutherland's Alchemy four times).",
   "skills": [
     "Platform & Systems Thinking",
     "AI Agent Design (MCP / LLMs)",
