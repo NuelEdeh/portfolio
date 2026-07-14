@@ -44,6 +44,64 @@ export default {
       }
     }
 
+    // Per-post pages: inject that post's meta tags so shared links unfurl
+    // with the essay's title/description instead of the site default.
+    const postMatch = url.pathname.match(/^\/writing\/([^/?#]+)\/?$/);
+    if (postMatch && request.method === 'GET') {
+      return renderPost(decodeURIComponent(postMatch[1]), request, env, url);
+    }
+
     return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;
+
+interface Post {
+  slug?: string;
+  title?: string;
+  excerpt?: string;
+  url?: string;
+}
+
+function setAttr(name: string, value: string) {
+  return { element(el: Element) { el.setAttribute(name, value); } };
+}
+
+async function renderPost(slug: string, request: Request, env: Env, url: URL): Promise<Response> {
+  const indexResp = await env.ASSETS.fetch(new URL('/index.html', url.origin).toString());
+
+  let post: Post | null = null;
+  try {
+    const cjson = await env.ASSETS.fetch(new URL('/content.json', url.origin).toString());
+    if (cjson.ok) {
+      const data = await cjson.json() as { posts?: Post[] };
+      post = (data.posts || []).find((p) => p.slug === slug && !p.url) || null;
+    }
+  } catch (e) {
+    console.error('content.json read failed:', e);
+  }
+
+  // Unknown slug: serve the app unchanged (it will fall back to the home view).
+  if (!post) return indexResp;
+
+  const title = `${post.title} · Nuel Edeh`;
+  const desc = (post.excerpt || 'An essay by Nuel Edeh.').replace(/\s+/g, ' ').trim();
+  const canonical = `https://nueledeh.com/writing/${slug}`;
+
+  return new HTMLRewriter()
+    .on('title', { element(el) { el.setInnerContent(title); } })
+    .on('meta[name="description"]', setAttr('content', desc))
+    .on('meta[property="og:title"]', setAttr('content', title))
+    .on('meta[property="og:description"]', setAttr('content', desc))
+    .on('meta[property="og:type"]', setAttr('content', 'article'))
+    .on('meta[name="twitter:title"]', setAttr('content', title))
+    .on('meta[name="twitter:description"]', setAttr('content', desc))
+    .on('head', {
+      element(el) {
+        el.append(
+          `<link rel="canonical" href="${canonical}"><meta property="og:url" content="${canonical}">`,
+          { html: true }
+        );
+      },
+    })
+    .transform(indexResp);
+}

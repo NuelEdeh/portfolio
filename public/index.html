@@ -473,6 +473,18 @@
     .reader-body { font-size: 17px; line-height: 1.8; color: var(--ink-3); }
     .reader-body p { margin-bottom: 1.5rem; }
     .reader-body p:last-child { margin-bottom: 0; }
+    .reader-footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+    .reader-more-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 12px; }
+    .reader-more-item { display: flex; flex-direction: column; gap: 3px; padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+    .reader-more-item:hover .reader-more-title { color: var(--accent); }
+    .reader-more-title { font-family: var(--serif); font-size: 19px; color: var(--ink); transition: color 0.2s; }
+    .reader-more-meta { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-2); }
+    .reader-nav { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 40px; }
+    .reader-nav-link { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--ink); transition: color 0.2s; }
+    .reader-nav-link:hover { color: var(--accent); }
+    .reader-social { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 14px; }
+    .reader-social a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--muted-2); transition: color 0.2s; }
+    .reader-social a:hover { color: var(--accent); }
     .reader-body strong { font-weight: 500; color: var(--ink); }
     .reader-body em { font-style: italic; }
     /* Section headings inside a post */
@@ -664,11 +676,12 @@
   <!-- ========================= READING VIEW ========================= -->
   <section id="reader">
     <div class="reader-inner">
-      <button class="reader-back" onclick="closeReader()">← Back to writing</button>
+      <button class="reader-back" onclick="backToWriting()">← Back to writing</button>
       <div class="reader-meta" id="reader-meta"></div>
       <h1 class="reader-title" id="reader-title"></h1>
       <div class="reader-tags" id="reader-tags"></div>
       <div class="reader-body" id="reader-body"></div>
+      <div class="reader-footer" id="reader-footer"></div>
     </div>
   </section>
 
@@ -866,8 +879,8 @@
         a.target = '_blank';
         a.rel = 'noopener';
       } else {
-        a.href = '#read-' + (p.slug || '');
-        a.addEventListener('click', (e) => { e.preventDefault(); openReader(p.slug); });
+        a.href = '/writing/' + (p.slug || '');
+        a.addEventListener('click', (e) => { e.preventDefault(); openReader(p.slug, true); });
       }
       return a;
     }
@@ -959,9 +972,9 @@
     }
 
     /* ---------- reading view ---------- */
-    function openReader(slug) {
+    function openReader(slug, push) {
       const p = postsBySlug[slug];
-      if (!p || p.url) return;
+      if (!p || p.url) { if (push) history.pushState(null, '', '/'); return; }
       document.getElementById('reader-meta').textContent =
         fmtDate(p.date, p.dateLabel) + (p.label ? '  ·  ' + p.label : '');
       document.getElementById('reader-title').textContent = p.title || '';
@@ -971,19 +984,93 @@
       (p.tags || []).forEach(t => tags.appendChild(el('span', 'reader-tag', t)));
 
       renderPostBody(document.getElementById('reader-body'), p.body || '');
+      renderReaderFooter(p);
 
       document.getElementById('main').classList.add('hidden');
       document.getElementById('reader').classList.add('active');
       window.scrollTo(0, 0);
-      history.replaceState(null, '', '#read-' + slug);
+
+      const path = '/writing/' + slug;
+      if (push) history.pushState({ slug: slug }, '', path);
+      else history.replaceState({ slug: slug }, '', path);
     }
 
-    function closeReader() {
+    function closeReader(fromRoute) {
       const reader = document.getElementById('reader');
-      if (!reader.classList.contains('active')) return;
+      const wasActive = reader.classList.contains('active');
       reader.classList.remove('active');
       document.getElementById('main').classList.remove('hidden');
-      if (location.hash.indexOf('#read-') === 0) history.replaceState(null, '', '#writing');
+      if (!fromRoute && wasActive) history.pushState(null, '', '/');
+    }
+
+    function backToWriting() {
+      closeReader();
+      const w = document.getElementById('writing');
+      if (w) w.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    function goToSection(id) {
+      closeReader();
+      const node = document.getElementById(id);
+      if (node) node.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    /* Deep-link routing: /writing/<slug>, with legacy #read-<slug> support. */
+    function route() {
+      const m = location.pathname.match(/^\/writing\/([^\/?#]+)/);
+      if (m) { openReader(decodeURIComponent(m[1]), false); return; }
+      if (location.hash.indexOf('#read-') === 0) {
+        openReader(location.hash.slice('#read-'.length), false);
+        return;
+      }
+      closeReader(true);
+    }
+
+    /* Backlinks shown at the foot of every post: more essays, site nav, profiles. */
+    function renderReaderFooter(current) {
+      const wrap = document.getElementById('reader-footer');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      const meta = (DATA && DATA.meta) || {};
+      const posts = (DATA && DATA.posts) || [];
+
+      const related = posts.slice()
+        .filter(p => p.slug && p.slug !== current.slug)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3);
+      if (related.length) {
+        const sec = el('div', 'reader-more');
+        sec.appendChild(el('div', 'reader-more-label', 'More writing'));
+        related.forEach(p => {
+          const a = el('a', 'reader-more-item');
+          if (p.url) {
+            a.href = p.url; a.target = '_blank'; a.rel = 'noopener';
+          } else {
+            a.href = '/writing/' + p.slug;
+            a.addEventListener('click', (e) => { e.preventDefault(); openReader(p.slug, true); });
+          }
+          a.appendChild(el('span', 'reader-more-title', p.title || ''));
+          a.appendChild(el('span', 'reader-more-meta',
+            fmtDate(p.date, p.dateLabel) + (p.label ? '  ·  ' + p.label : '') + (p.url ? '   ↗' : '')));
+          sec.appendChild(a);
+        });
+        wrap.appendChild(sec);
+      }
+
+      const nav = el('div', 'reader-nav');
+      [['About', 'about'], ['Work', 'work'], ['Writing', 'writing'], ['Contact', 'contact']].forEach(pair => {
+        const a = el('a', 'reader-nav-link', pair[0]);
+        a.href = '/#' + pair[1];
+        a.addEventListener('click', (e) => { e.preventDefault(); goToSection(pair[1]); });
+        nav.appendChild(a);
+      });
+      wrap.appendChild(nav);
+
+      const social = el('div', 'reader-social');
+      if (meta.email) { const a = el('a', null, 'Email'); a.href = 'mailto:' + meta.email; social.appendChild(a); }
+      if (meta.linkedin) { const a = el('a', null, 'LinkedIn ↗'); a.href = meta.linkedin; a.target = '_blank'; a.rel = 'noopener'; social.appendChild(a); }
+      if (meta.github) { const a = el('a', null, 'GitHub ↗'); a.href = meta.github; a.target = '_blank'; a.rel = 'noopener'; social.appendChild(a); }
+      wrap.appendChild(social);
     }
 
     /* ---------- motion ---------- */
@@ -1041,13 +1128,13 @@
     }
 
     /* ---------- boot ---------- */
+    window.addEventListener('popstate', route);
+
     fetch('/content.json')
       .then(r => r.json())
       .then(data => {
         render(data);
-        if (location.hash.indexOf('#read-') === 0) {
-          openReader(location.hash.slice('#read-'.length));
-        }
+        route();
       })
       .catch(err => {
         console.error('Failed to load content.json', err);
