@@ -11,6 +11,7 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 
 ## Published ✅
 - What a Chemical Engineer Knows About Product *(featured)*
+- Ship Fast, Sit Still *(introspection × the bias to ship; the internal rudder)*
 - Held With Confidence, Never Rigidity *(roadmaps as sequenced hypotheses)*
 - Building AI agents at Cloudflare · Rory Sutherland / product decisions · DNS security for PMs · Valentine's Day / Oona
 - Neat-era (republished): psychological safety · a simpler approach to work · stand-ups people don't hate
@@ -21,11 +22,13 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - **PM as translator** — turning resolver degradation / incidents into narratives execs can act on.
 - **What I look for now** — the team/problem you want next; doubles as a signal to people reading the site.
 - **The gated rollout** — shipping two ways (straight to the process engine vs. gated to one customer); trust at scale.
+- **The invisible half of leadership** — the introspective work leaders never show, so it never gets modelled or practised. Expands a section of *Ship Fast*.
 
 ## Personal → philosophical (the seam that feels alive)
 - **Show up. Receive.** — the photons / sun-ritual moment; attention and grace. *(strong next pick)*
 - **What my cat taught me about control** — Oona refusing your hierarchy → letting go of control in teams, products, life. *(strong next pick)*
-- **On being introspective *and* biased toward shipping** — the tension in your About; most people pick one.
+- **Aba** — the origin story: where the bias to action was forged, hustling with family to cover school fees. Named it in *Ship Fast*; this is the whole thing. *(you want this one)*
+- **Listening to the heat** — the somatic-intuition deep cut; you can't trust your gut until you learn to sit with it. Extends *Ship Fast*.
 - **Reading the same book four times** — depth over novelty in an AI-flooded feed.
 - **The self that forms when no one is watching** — writing to become the person who writes; being seen vs. expressing regardless. *(straight from your own words — this one is yours)*
 - **Validation hunger** — the honest essay about wanting to be seen, and writing anyway.
