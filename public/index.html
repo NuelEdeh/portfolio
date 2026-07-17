@@ -517,6 +517,85 @@
       line-height: 1.4;
       color: var(--ink-2);
     }
+    /* Section headings become jump targets; clear the sticky nav on jump */
+    .reader-body h3 { scroll-margin-top: 84px; }
+
+    /* ── TABLE OF CONTENTS ──
+       Desktop: a quiet margin index that tracks the column and highlights
+       the current section. Mobile: a collapsible "On this page" disclosure. */
+    .toc-hidden { display: none !important; }
+    .reader-toc {
+      position: fixed;
+      top: 140px;
+      left: calc(50% + 368px);
+      width: 184px;
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+      display: none;
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+    }
+    @media (min-width: 1280px) { #reader.active .reader-toc { display: block; } }
+    .reader-toc-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 14px;
+    }
+    .reader-toc a {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      color: var(--muted-2);
+      text-decoration: none;
+      padding: 6px 0 6px 16px;
+      margin-left: -17px;
+      border-left: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .reader-toc a:hover { color: var(--ink); }
+    .reader-toc a.active { color: var(--accent); border-left-color: var(--accent); }
+
+    /* Mobile / narrow: collapsible disclosure above the article */
+    .reader-toc-m {
+      margin-bottom: 40px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 0 16px;
+    }
+    .reader-toc-m > summary {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 14px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reader-toc-m > summary::-webkit-details-marker { display: none; }
+    .reader-toc-m > summary::after { content: '+'; color: var(--accent); font-size: 15px; line-height: 1; }
+    .reader-toc-m[open] > summary::after { content: '–'; }
+    .reader-toc-m-list a {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      color: var(--muted-2);
+      text-decoration: none;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+    .reader-toc-m-list a:hover { color: var(--accent); }
+    .reader-toc-m-list { padding-bottom: 6px; }
+    @media (min-width: 1280px) { .reader-toc-m { display: none; } }
 
     /* ============================================================
        CONTACT
@@ -675,11 +754,16 @@
 
   <!-- ========================= READING VIEW ========================= -->
   <section id="reader">
+    <div id="reader-toc" class="reader-toc" role="navigation" aria-label="Table of contents"></div>
     <div class="reader-inner">
       <button class="reader-back" onclick="backToWriting()">← Back to writing</button>
       <div class="reader-meta" id="reader-meta"></div>
       <h1 class="reader-title" id="reader-title"></h1>
       <div class="reader-tags" id="reader-tags"></div>
+      <details id="reader-toc-m" class="reader-toc-m">
+        <summary>On this page</summary>
+        <div class="reader-toc-m-list" role="navigation" aria-label="Table of contents"></div>
+      </details>
       <div class="reader-body" id="reader-body"></div>
       <div class="reader-footer" id="reader-footer"></div>
     </div>
@@ -950,14 +1034,22 @@
       s = s.replace(/==([^=]+)==/g, '<mark class="hl">$1</mark>');
       return s;
     }
+    function slugifyHeading(text) {
+      return (text.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60)) || 'section';
+    }
     function renderPostBody(container, body) {
       container.innerHTML = '';
+      const usedIds = {};
       body.split(/\n\n+/).forEach(block => {
         const b = block.trim();
         if (!b) return;
         if (b.slice(0, 3) === '## ') {
           const h = el('h3');
           h.innerHTML = mdInline(b.slice(3).trim());
+          let id = slugifyHeading(h.textContent), base = id, n = 2;
+          while (usedIds[id]) { id = base + '-' + n; n++; }
+          usedIds[id] = true;
+          h.id = id;
           container.appendChild(h);
         } else if (b[0] === '>') {
           const q = el('blockquote');
@@ -972,6 +1064,7 @@
     }
 
     /* ---------- reading view ---------- */
+    let tocScrollHandler = null;
     function openReader(slug, push) {
       const p = postsBySlug[slug];
       if (!p || p.url) { if (push) history.pushState(null, '', '/'); return; }
@@ -989,6 +1082,7 @@
       document.getElementById('main').classList.add('hidden');
       document.getElementById('reader').classList.add('active');
       window.scrollTo(0, 0);
+      buildTOC(); // after the reader is visible, so heading positions are real
 
       const path = '/writing/' + slug;
       if (push) history.pushState({ slug: slug }, '', path);
@@ -1000,7 +1094,73 @@
       const wasActive = reader.classList.contains('active');
       reader.classList.remove('active');
       document.getElementById('main').classList.remove('hidden');
+      if (tocScrollHandler) { window.removeEventListener('scroll', tocScrollHandler); tocScrollHandler = null; }
       if (!fromRoute && wasActive) history.pushState(null, '', '/');
+    }
+
+    /* Table of contents: a desktop margin index + mobile disclosure, built
+       from the post's section headings, with scroll-spy on the active one. */
+    function buildTOC() {
+      const desktop = document.getElementById('reader-toc');
+      const mobileWrap = document.getElementById('reader-toc-m');
+      const mobileList = mobileWrap ? mobileWrap.querySelector('.reader-toc-m-list') : null;
+
+      if (tocScrollHandler) { window.removeEventListener('scroll', tocScrollHandler); tocScrollHandler = null; }
+      desktop.innerHTML = '';
+      if (mobileList) mobileList.innerHTML = '';
+      if (mobileWrap) mobileWrap.removeAttribute('open');
+
+      const headings = Array.prototype.slice.call(
+        document.getElementById('reader-body').querySelectorAll('h3'));
+
+      if (headings.length < 2) {
+        desktop.classList.add('toc-hidden');
+        if (mobileWrap) mobileWrap.classList.add('toc-hidden');
+        return;
+      }
+      desktop.classList.remove('toc-hidden');
+      if (mobileWrap) mobileWrap.classList.remove('toc-hidden');
+
+      desktop.appendChild(el('div', 'reader-toc-label', 'On this page'));
+
+      const linkById = {};
+      headings.forEach(h => {
+        const a = el('a', null, h.textContent);
+        a.href = '#' + h.id;
+        a.addEventListener('click', (e) => { e.preventDefault(); jumpToHeading(h); });
+        desktop.appendChild(a);
+        linkById[h.id] = a;
+
+        if (mobileList) {
+          const ma = el('a', null, h.textContent);
+          ma.href = '#' + h.id;
+          ma.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileWrap.removeAttribute('open');
+            jumpToHeading(h);
+          });
+          mobileList.appendChild(ma);
+        }
+      });
+
+      function update() {
+        let activeId = headings[0].id;
+        for (let i = 0; i < headings.length; i++) {
+          if (headings[i].getBoundingClientRect().top <= 120) activeId = headings[i].id;
+          else break;
+        }
+        for (const id in linkById) linkById[id].classList.toggle('active', id === activeId);
+      }
+      let ticking = false;
+      tocScrollHandler = function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); }
+      };
+      window.addEventListener('scroll', tocScrollHandler, { passive: true });
+      update();
+    }
+
+    function jumpToHeading(h) {
+      h.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
     }
 
     function backToWriting() {
