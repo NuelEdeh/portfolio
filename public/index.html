@@ -519,6 +519,12 @@
     }
     /* Section headings become jump targets; clear the sticky nav on jump */
     .reader-body h3 { scroll-margin-top: 84px; }
+    .reader-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+    }
 
     /* ── TABLE OF CONTENTS ──
        Desktop: a quiet margin index that tracks the column and highlights
@@ -1032,6 +1038,9 @@
       s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
       s = s.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, '$1<em>$2</em>');
       s = s.replace(/==([^=]+)==/g, '<mark class="hl">$1</mark>');
+      // [text](url) — http(s) only, so a body can never inject a javascript: URI
+      s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener">$1</a>');
       return s;
     }
     function slugifyHeading(text) {

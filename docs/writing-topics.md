@@ -13,12 +13,12 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - What a Chemical Engineer Knows About Product *(featured)*
 - Ship Fast, Sit Still *(introspection × the bias to ship; the internal rudder)*
 - What My Cat Taught Me About Control *(control × autonomy; giving up control on purpose; Oona)*
+- Who Applies the Brakes *(reliability as a cultural problem; the 20% rule; the brake is a person)*
 - Held With Confidence, Never Rigidity *(roadmaps as sequenced hypotheses)*
 - Building AI agents at Cloudflare · Rory Sutherland / product decisions · DNS security for PMs · Valentine's Day / Oona
 - Neat-era (republished): psychological safety · a simpler approach to work · stand-ups people don't hate
 
 ## Professional, reframed from lived experience
-- **The 2 a.m. load test** — reliability as a cultural problem, not a technical one (deeper cut of the roadmap piece).
 - **Selling confidence, not features** — the CISO-anxiety insight, generalized into a positioning philosophy.
 - **PM as translator** — turning resolver degradation / incidents into narratives execs can act on.
 - **What I look for now** — the team/problem you want next; doubles as a signal to people reading the site.
