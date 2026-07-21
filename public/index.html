@@ -620,6 +620,51 @@
       margin-bottom: 32px;
     }
     .contact-title em { font-style: italic; color: var(--accent); }
+    /* Contact intake form — posts to the Worker's /contact endpoint */
+    .contact-form { max-width: 520px; margin: 0 auto 36px; text-align: left; }
+    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .cf-field { margin-bottom: 14px; }
+    .cf-field label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 6px;
+    }
+    .cf-opt { text-transform: none; letter-spacing: 0; }
+    .cf-field input, .cf-field textarea {
+      width: 100%;
+      padding: 11px 13px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      transition: border-color 0.2s;
+    }
+    .cf-field textarea { resize: vertical; min-height: 110px; }
+    .cf-field input:focus, .cf-field textarea:focus { outline: none; border-color: var(--accent); }
+    .cf-submit {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 13px 26px;
+      border: 1px solid var(--ink);
+      border-radius: 3px;
+      background: var(--ink);
+      color: var(--paper);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .cf-submit:hover { opacity: 0.85; }
+    .cf-submit:disabled { opacity: 0.5; cursor: default; }
+    .cf-status { font-family: var(--mono); font-size: 11.5px; line-height: 1.5; margin-top: 12px; }
+    .cf-status.ok { color: var(--signal); }
+    .cf-status.err { color: var(--accent); }
+    @media (max-width: 560px) { .cf-row { grid-template-columns: 1fr; gap: 0; } }
+
     .contact-links { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; font-family: var(--mono); font-size: 12px; }
     .contact-links a {
       text-decoration: none;
@@ -752,6 +797,30 @@
       <div class="contact-inner">
         <div class="eyebrow contact-num">04 / Contact</div>
         <h2 class="contact-title">Let's build something<br /><em>worth writing about.</em></h2>
+
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" type="text" autocomplete="name" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf-company">Company <span class="cf-opt">(optional)</span></label>
+            <input id="cf-company" type="text" autocomplete="organization" />
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="cf-submit" id="cf-submit">Send message</button>
+          <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
+        </form>
+
         <div class="contact-links" id="contact-links"></div>
         <div class="contact-signature">Nuel</div>
       </div>
@@ -843,6 +912,7 @@
 
       // Contact
       renderContact(meta);
+      initContactForm();
 
       // Footer
       document.getElementById('footer-text').innerHTML =
@@ -1004,6 +1074,50 @@
       a.appendChild(el('div', 'post-card-excerpt', p.excerpt || ''));
       if (p.reflection) a.appendChild(el('div', 'post-card-reflection', p.reflection));
       return a;
+    }
+
+    /* Contact form: posts JSON to the Worker, which relays it over Resend.
+       This path doesn't depend on the hello@ mail alias. */
+    function initContactForm() {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+      const btn = document.getElementById('cf-submit');
+      const status = document.getElementById('cf-status');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('cf-name').value.trim();
+        const email = document.getElementById('cf-email').value.trim();
+        const company = document.getElementById('cf-company').value.trim();
+        const message = document.getElementById('cf-message').value.trim();
+
+        status.className = 'cf-status';
+        if (!name || !email || !message) {
+          status.classList.add('err');
+          status.textContent = 'Name, email and message are all required.';
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        try {
+          const res = await fetch('/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, company, message }),
+          });
+          if (!res.ok) throw new Error('send failed');
+          form.reset();
+          status.classList.add('ok');
+          status.textContent = 'Sent. I’ll get back to you.';
+        } catch (err) {
+          status.classList.add('err');
+          status.textContent = 'That didn’t send. Try again, or reach me on LinkedIn.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Send message';
+        }
+      });
     }
 
     function renderContact(meta) {
