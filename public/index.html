@@ -519,6 +519,99 @@
     }
     /* Section headings become jump targets; clear the sticky nav on jump */
     .reader-body h3 { scroll-margin-top: 84px; }
+
+    /* ── AUDIO PLAYER ──
+       Listen to the essay in Nuel's cloned voice. Pre-generated MP3 served as
+       a static asset; shown only when the post has an `audio` field.
+       Layout: a large play button anchors the left; title, scrubber, and the
+       secondary skip/speed controls stack on the right. */
+    .reader-audio {
+      display: flex; align-items: center; gap: 18px;
+      margin: 0 0 40px; padding: 16px 18px;
+      border: 1px solid var(--line); border-radius: 6px;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .ra-play {
+      flex-shrink: 0;
+      width: 58px; height: 58px; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--ink); border: none; border-radius: 50%;
+      cursor: pointer; transition: background 0.2s, transform 0.1s;
+    }
+    .ra-play:hover { background: var(--accent); }
+    .ra-play:active { transform: scale(0.96); }
+    .ra-play svg { width: 26px; height: 26px; fill: var(--paper); }
+    .ra-ico-pause { display: none; }
+    .reader-audio.playing .ra-ico-play { display: none; }
+    .reader-audio.playing .ra-ico-pause { display: block; }
+
+    .ra-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 9px; }
+    .ra-title-row { text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; line-height: 1.3; }
+    .ra-title { color: var(--ink); font-weight: 500; }
+    .ra-by { color: var(--muted-2); }
+    .ra-by::before { content: "·"; margin: 0 7px; color: var(--muted-2); }
+
+    .ra-progress { display: flex; align-items: center; gap: 10px; }
+    .ra-t { font-family: var(--mono); font-size: 11px; color: var(--muted-2); font-variant-numeric: tabular-nums; min-width: 34px; }
+    .ra-t:last-of-type { text-align: right; }
+    .reader-audio input.ra-scrub {
+      -webkit-appearance: none; appearance: none; flex: 1; min-width: 40px;
+      height: 3px; background: var(--line-strong); border-radius: 2px; cursor: pointer;
+    }
+    .reader-audio input.ra-scrub::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 13px; height: 13px; border-radius: 50%; background: var(--ink); cursor: pointer;
+    }
+    .reader-audio input.ra-scrub::-moz-range-thumb {
+      width: 13px; height: 13px; border: none; border-radius: 50%; background: var(--ink); cursor: pointer;
+    }
+    .ra-mute {
+      flex-shrink: 0; width: 30px; height: 30px; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: none; border: none; color: var(--muted); cursor: pointer; transition: color 0.2s;
+    }
+    .ra-mute:hover { color: var(--ink); }
+    .ra-mute svg { width: 20px; height: 20px; fill: currentColor; }
+    .ra-ico-muted { display: none; }
+    .reader-audio.muted .ra-ico-vol { display: none; }
+    .reader-audio.muted .ra-ico-muted { display: block; }
+    .reader-audio.muted .ra-mute { color: var(--accent); }
+
+    .ra-secondary { display: flex; align-items: center; justify-content: center; gap: 22px; }
+    .ra-skip {
+      width: 34px; height: 34px; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: none; border: none; color: var(--ink); cursor: pointer; transition: color 0.2s;
+    }
+    .ra-skip:hover { color: var(--accent); }
+    .ra-skip svg { width: 26px; height: 26px; display: block; }
+    .ra-speedwrap { position: relative; }
+    .ra-speed {
+      font-family: var(--mono); font-size: 12px; min-width: 48px;
+      padding: 5px 9px; color: var(--ink); background: none;
+      border: 1px solid var(--line-strong); border-radius: 4px; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .ra-speed:hover { border-color: var(--accent); color: var(--accent); }
+    .ra-speedmenu {
+      position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; gap: 1px; padding: 5px;
+      background: var(--paper); border: 1px solid var(--line-strong); border-radius: 6px;
+      box-shadow: 0 6px 20px rgba(26, 26, 24, 0.14); z-index: 20;
+    }
+    .ra-speedmenu[hidden] { display: none; }
+    .ra-speedmenu button {
+      font-family: var(--mono); font-size: 12px; color: var(--ink);
+      padding: 6px 18px; background: none; border: none; border-radius: 3px; cursor: pointer; white-space: nowrap;
+    }
+    .ra-speedmenu button:hover { background: var(--panel); color: var(--accent); }
+    .ra-speedmenu button.current { color: var(--accent); font-weight: 500; }
+    @media (max-width: 560px) {
+      .reader-audio { gap: 14px; padding: 14px; }
+      .ra-play { width: 50px; height: 50px; }
+      .ra-play svg { width: 22px; height: 22px; }
+      .ra-secondary { gap: 16px; }
+    }
     .reader-body a {
       color: var(--accent);
       text-decoration: underline;
@@ -835,6 +928,55 @@
       <div class="reader-meta" id="reader-meta"></div>
       <h1 class="reader-title" id="reader-title"></h1>
       <div class="reader-tags" id="reader-tags"></div>
+
+      <div class="reader-audio" id="reader-audio" hidden>
+        <button class="ra-play" id="ra-play" type="button" aria-label="Play">
+          <svg class="ra-ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="ra-ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <div class="ra-main">
+          <div class="ra-title-row">
+            <span class="ra-title" id="ra-title"></span><span class="ra-by">Nuel Edeh</span>
+          </div>
+          <div class="ra-progress">
+            <span class="ra-t" id="ra-cur">0:00</span>
+            <input type="range" class="ra-scrub" id="ra-scrub" min="0" max="1000" value="0" step="1" aria-label="Seek" />
+            <span class="ra-t" id="ra-dur">0:00</span>
+            <button class="ra-mute" id="ra-mute" type="button" aria-label="Mute">
+              <svg class="ra-ico-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path class="ra-wave" d="M16 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <svg class="ra-ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="ra-secondary">
+            <button class="ra-skip" id="ra-back" type="button" aria-label="Back 15 seconds">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M11.5 5.5a6.5 6.5 0 1 0 6.4 5.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M13.6 3 10.3 5.5l3.3 2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="12" y="15.2" text-anchor="middle" font-size="7.5" font-weight="600" fill="currentColor" style="font-family:var(--mono)">15</text>
+              </svg>
+            </button>
+            <div class="ra-speedwrap">
+              <button class="ra-speed" id="ra-speed" type="button" aria-haspopup="true" aria-expanded="false">1.0×</button>
+              <div class="ra-speedmenu" id="ra-speedmenu" role="menu" hidden>
+                <button type="button" role="menuitem" data-rate="0.8">0.8×</button>
+                <button type="button" role="menuitem" data-rate="1">1.0×</button>
+                <button type="button" role="menuitem" data-rate="1.2">1.2×</button>
+                <button type="button" role="menuitem" data-rate="1.5">1.5×</button>
+                <button type="button" role="menuitem" data-rate="2">2.0×</button>
+              </div>
+            </div>
+            <button class="ra-skip" id="ra-fwd" type="button" aria-label="Forward 15 seconds">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12.5 5.5a6.5 6.5 0 1 1-6.4 5.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10.4 3l3.3 2.5-3.3 2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="12" y="15.2" text-anchor="middle" font-size="7.5" font-weight="600" fill="currentColor" style="font-family:var(--mono)">15</text>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <audio id="ra-audio" preload="metadata"></audio>
+      </div>
+
       <details id="reader-toc-m" class="reader-toc-m">
         <summary>On this page</summary>
         <div class="reader-toc-m-list" role="navigation" aria-label="Table of contents"></div>
@@ -1206,6 +1348,7 @@
       document.getElementById('reader').classList.add('active');
       window.scrollTo(0, 0);
       buildTOC(); // after the reader is visible, so heading positions are real
+      initAudioPlayer(p);
 
       const path = '/writing/' + slug;
       if (push) history.pushState({ slug: slug }, '', path);
@@ -1217,6 +1360,8 @@
       const wasActive = reader.classList.contains('active');
       reader.classList.remove('active');
       document.getElementById('main').classList.remove('hidden');
+      const raAudio = document.getElementById('ra-audio');
+      if (raAudio) raAudio.pause();
       if (tocScrollHandler) { window.removeEventListener('scroll', tocScrollHandler); tocScrollHandler = null; }
       if (!fromRoute && wasActive) history.pushState(null, '', '/');
     }
@@ -1284,6 +1429,86 @@
 
     function jumpToHeading(h) {
       h.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    /* Audio narration player. Shown only when the post carries an `audio` URL
+       (a pre-generated MP3). Controls are wired once, then reused per essay. */
+    function fmtClock(s) {
+      if (!isFinite(s) || s < 0) s = 0;
+      s = Math.floor(s);
+      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
+    function raSetSpeed(rate) {
+      const audio = document.getElementById('ra-audio');
+      audio.playbackRate = rate;
+      document.getElementById('ra-speed').textContent = Number(rate).toFixed(1) + '×';
+      document.querySelectorAll('#ra-speedmenu button').forEach((b) => {
+        b.classList.toggle('current', Number(b.dataset.rate) === rate);
+      });
+    }
+    function raCloseSpeedMenu() {
+      document.getElementById('ra-speedmenu').hidden = true;
+      document.getElementById('ra-speed').setAttribute('aria-expanded', 'false');
+    }
+    function initAudioPlayer(post) {
+      const wrap = document.getElementById('reader-audio');
+      if (!wrap) return;
+      const audio = document.getElementById('ra-audio');
+      audio.pause();
+
+      if (!post || !post.audio) { wrap.hidden = true; audio.removeAttribute('src'); return; }
+
+      wrap.hidden = false;
+      wrap.classList.remove('playing');
+      document.getElementById('ra-title').textContent = post.title || '';
+      document.getElementById('ra-cur').textContent = '0:00';
+      document.getElementById('ra-dur').textContent = '0:00';
+      document.getElementById('ra-scrub').value = 0;
+      audio.src = post.audio;
+      raCloseSpeedMenu();
+
+      if (!wrap.dataset.wired) {
+        wrap.dataset.wired = '1';
+        const scrub = document.getElementById('ra-scrub');
+        const cur = document.getElementById('ra-cur');
+        const dur = document.getElementById('ra-dur');
+        const speed = document.getElementById('ra-speed');
+        const menu = document.getElementById('ra-speedmenu');
+        const mute = document.getElementById('ra-mute');
+
+        document.getElementById('ra-play').addEventListener('click', () => { audio.paused ? audio.play() : audio.pause(); });
+        audio.addEventListener('play', () => wrap.classList.add('playing'));
+        audio.addEventListener('pause', () => wrap.classList.remove('playing'));
+        audio.addEventListener('ended', () => wrap.classList.remove('playing'));
+        audio.addEventListener('loadedmetadata', () => { dur.textContent = fmtClock(audio.duration); });
+        audio.addEventListener('timeupdate', () => {
+          cur.textContent = fmtClock(audio.currentTime);
+          if (audio.duration) scrub.value = Math.round((audio.currentTime / audio.duration) * 1000);
+        });
+        scrub.addEventListener('input', () => { if (audio.duration) audio.currentTime = (scrub.value / 1000) * audio.duration; });
+        document.getElementById('ra-back').addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+        document.getElementById('ra-fwd').addEventListener('click', () => { audio.currentTime = Math.min(audio.duration || 1e9, audio.currentTime + 15); });
+
+        // Speed: a small preset menu instead of a cycling button.
+        speed.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const open = menu.hidden;
+          menu.hidden = !open;
+          speed.setAttribute('aria-expanded', String(open));
+        });
+        menu.querySelectorAll('button').forEach((b) => {
+          b.addEventListener('click', () => { raSetSpeed(Number(b.dataset.rate)); raCloseSpeedMenu(); });
+        });
+        document.addEventListener('click', (e) => {
+          if (!menu.hidden && !menu.contains(e.target) && e.target !== speed) raCloseSpeedMenu();
+        });
+
+        // Mute only — playback volume is the device's job.
+        mute.addEventListener('click', () => { audio.muted = !audio.muted; wrap.classList.toggle('muted', audio.muted); });
+      }
+
+      raSetSpeed(1);
+      wrap.classList.toggle('muted', audio.muted);
     }
 
     function backToWriting() {
