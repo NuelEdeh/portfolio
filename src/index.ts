@@ -1,6 +1,7 @@
 export interface Env {
   ASSETS: Fetcher;
   RESEND_API_KEY: string;
+  AUDIO?: R2Bucket;
 }
 
 export default {
@@ -44,6 +45,12 @@ export default {
       }
     }
 
+    // Pre-generated narration audio, served from the R2 bucket. Falls back to
+    // static assets when the bucket isn't bound yet (e.g. plain local dev).
+    if (url.pathname.startsWith('/audio/') && (request.method === 'GET' || request.method === 'HEAD')) {
+      return serveAudio(request, env, url);
+    }
+
     // Per-post pages: inject that post's meta tags so shared links unfurl
     // with the essay's title/description instead of the site default.
     const postMatch = url.pathname.match(/^\/writing\/([^/?#]+)\/?$/);
@@ -54,6 +61,48 @@ export default {
     return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;
+
+async function serveAudio(request: Request, env: Env, url: URL): Promise<Response> {
+  if (!env.AUDIO) return env.ASSETS.fetch(request); // no bucket bound yet
+  const key = decodeURIComponent(url.pathname.slice('/audio/'.length));
+
+  // Honour Range requests so seeking/scrubbing streams instead of re-downloading.
+  const rangeHeader = request.headers.get('range');
+  let range: R2Range | undefined;
+  let start = 0, end = 0, isRange = false;
+  if (rangeHeader) {
+    const m = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader.trim());
+    if (m && (m[1] || m[2])) {
+      isRange = true;
+      if (m[1]) { start = parseInt(m[1], 10); range = { offset: start, length: m[2] ? parseInt(m[2], 10) - start + 1 : undefined }; }
+      else { range = { suffix: parseInt(m[2], 10) }; }
+    }
+  }
+
+  const obj = await env.AUDIO.get(key, { range, onlyIf: request.headers });
+  if (!obj) return new Response('Not found', { status: 404 });
+
+  const headers = new Headers();
+  obj.writeHttpMetadata(headers);
+  if (!headers.has('content-type')) headers.set('content-type', 'audio/mpeg');
+  headers.set('accept-ranges', 'bytes');
+  headers.set('cache-control', 'public, max-age=31536000, immutable');
+  headers.set('etag', obj.httpEtag);
+
+  if (request.method === 'HEAD') { headers.set('content-length', String(obj.size)); return new Response(null, { headers }); }
+  if (!('body' in obj) || !obj.body) return new Response(null, { status: 304, headers }); // onlyIf matched
+
+  if (isRange && obj.range) {
+    const r = obj.range as { offset?: number; length?: number; suffix?: number };
+    const s = r.suffix != null ? obj.size - r.suffix : (r.offset || 0);
+    const len = r.suffix != null ? r.suffix : (r.length != null ? r.length : obj.size - s);
+    headers.set('content-range', `bytes ${s}-${s + len - 1}/${obj.size}`);
+    headers.set('content-length', String(len));
+    return new Response(obj.body, { status: 206, headers });
+  }
+  headers.set('content-length', String(obj.size));
+  return new Response(obj.body, { headers });
+}
 
 interface Post {
   slug?: string;

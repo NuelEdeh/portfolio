@@ -1,5 +1,6 @@
 {
   "name": "nuel-portfolio",
+  "account_id": "6ad7fcaefe8eb6c20305d6b1b814ca3d",
   "main": "src/index.ts",
   "compatibility_date": "2025-03-07",
   "compatibility_flags": ["nodejs_compat"],
@@ -8,13 +9,19 @@
     "not_found_handling": "single-page-application",
     "binding": "ASSETS"
   },
+  "r2_buckets": [
+    { "binding": "AUDIO", "bucket_name": "nuel-portfolio-audio" }
+  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
   },
   "env": {
     "preview": {
-      "name": "nuel-portfolio-preview"
+      "name": "nuel-portfolio-preview",
+      "r2_buckets": [
+        { "binding": "AUDIO", "bucket_name": "nuel-portfolio-audio" }
+      ]
     }
   }
 }
