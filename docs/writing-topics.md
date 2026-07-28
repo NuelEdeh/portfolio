@@ -14,13 +14,14 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - Ship Fast, Sit Still *(introspection × the bias to ship; the internal rudder)*
 - What My Cat Taught Me About Control *(control × autonomy; giving up control on purpose; Oona)*
 - Who Applies the Brakes *(reliability as a cultural problem; the 20% rule; the brake is a person)*
+- Liked or Trusted *(the PM as container vs mirror; coverage isn't presence; how the brake gets applied)*
+- How Was Your Weekend *(ethical gossip; holding the mirror without fusing; moon or sun)*
 - Held With Confidence, Never Rigidity *(roadmaps as sequenced hypotheses)*
 - Building AI agents at Cloudflare · Rory Sutherland / product decisions · DNS security for PMs · Valentine's Day / Oona
 - Neat-era (republished): psychological safety · a simpler approach to work · stand-ups people don't hate
 
 ## Professional, reframed from lived experience
 - **They know the recommended action. They cannot take it.** — the cyber poverty line as a general condition, not a security one. The distance between knowing what to do and having the leadership, budget, or capacity to do it. Strongest under-explored idea in *Who Applies the Brakes*.
-- **How to say no and still be trusted** — a no that stops at no is obstruction, and obstruction loses to a revenue number every time. The craft of the no that arrives with what happens instead. Direct sequel to *Brakes*.
 - **Funding the boring thing** — reliability, migrations, internal tooling: invisible when they work, career-defining when they fail. Why organisations systematically under-invest in work with no demo.
 - **Selling confidence, not features** — the CISO-anxiety insight, generalized into a positioning philosophy.
 - **PM as translator** — turning resolver degradation / incidents into narratives execs can act on.
@@ -54,7 +55,9 @@ Each is short: **Principle / Elaboration / Example.** Fast to write, builds a bo
 - Start in the petri dish (MVP's only job is to gather data)
 - Listen to the heat (innovation as courage before validation)
 - Hold twenty percent (the reliability slice, and why 15 is the floor)
-- A no needs a next (say what the slowing is for)
+- A no needs a next *(largely absorbed by "Liked or Trusted")*
+- Coverage is not presence (being everywhere and landing nowhere)
+- Why is this coming up right now (the discovery question; the story is not the reason)
 
 ## Format ideas
 - **Long-form flagship** (~800–1100 words) — the essays.
