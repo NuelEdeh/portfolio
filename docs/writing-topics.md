@@ -36,7 +36,7 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - **Reading the same book four times** — depth over novelty in an AI-flooded feed.
 - **The self that forms when no one is watching** — writing to become the person who writes; being seen vs. expressing regardless. *(straight from your own words — this one is yours)*
 - **Validation hunger** — the honest essay about wanting to be seen, and writing anyway.
-- **What survives a summary** — when summarising is free, the only thing with value is what a summary destroys: a specific voice, a lived quarter, a metaphor that reorganises how someone sees their job. Started as your own worry that nobody reads long essays anymore. *(your live question — write it while it's still bothering you)*
+- **What survives a summary** — when summarising is free, the only thing with value is what a summary destroys: a specific voice, a lived quarter, a metaphor that reorganises how someone sees their job. The word is **specificity**, and it's the whole argument. Novelty is a supply problem and the supply went infinite; specificity can't be produced on demand, because it needs someone to have actually been somewhere. Started as your own worry that nobody reads long essays anymore. *(your live question — write it while it's still bothering you)*
 - **Not all motion is progress** — the note on your board, the zigzagging org, and the difference between moving and going somewhere. Pulls the thread *Brakes* only had room to touch.
 
 ## Where-you're-at / the AI moment
