@@ -1360,8 +1360,7 @@
       const wasActive = reader.classList.contains('active');
       reader.classList.remove('active');
       document.getElementById('main').classList.remove('hidden');
-      const raAudio = document.getElementById('ra-audio');
-      if (raAudio) raAudio.pause();
+      raDetachAudio();
       if (tocScrollHandler) { window.removeEventListener('scroll', tocScrollHandler); tocScrollHandler = null; }
       if (!fromRoute && wasActive) history.pushState(null, '', '/');
     }
@@ -1450,21 +1449,36 @@
       document.getElementById('ra-speedmenu').hidden = true;
       document.getElementById('ra-speed').setAttribute('aria-expanded', 'false');
     }
+    /* Detach the element from whatever it was playing. `pause()` on its own
+       leaves the resource loaded and the media session alive, so a phone can
+       resume the previous essay from the lock screen while you're reading a
+       different one. Removing the src attribute doesn't run the load algorithm
+       either — only load() does. */
+    function raDetachAudio() {
+      const audio = document.getElementById('ra-audio');
+      const wrap = document.getElementById('reader-audio');
+      if (!audio) return;
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+      try { audio.currentTime = 0; } catch (e) { /* no resource attached */ }
+      if (wrap) wrap.classList.remove('playing');
+    }
     function initAudioPlayer(post) {
       const wrap = document.getElementById('reader-audio');
       if (!wrap) return;
       const audio = document.getElementById('ra-audio');
-      audio.pause();
+      raDetachAudio();
 
-      if (!post || !post.audio) { wrap.hidden = true; audio.removeAttribute('src'); return; }
+      if (!post || !post.audio) { wrap.hidden = true; return; }
 
       wrap.hidden = false;
-      wrap.classList.remove('playing');
       document.getElementById('ra-title').textContent = post.title || '';
       document.getElementById('ra-cur').textContent = '0:00';
       document.getElementById('ra-dur').textContent = '0:00';
       document.getElementById('ra-scrub').value = 0;
       audio.src = post.audio;
+      audio.load();
       raCloseSpeedMenu();
 
       if (!wrap.dataset.wired) {
@@ -1476,7 +1490,12 @@
         const menu = document.getElementById('ra-speedmenu');
         const mute = document.getElementById('ra-mute');
 
-        document.getElementById('ra-play').addEventListener('click', () => { audio.paused ? audio.play() : audio.pause(); });
+        document.getElementById('ra-play').addEventListener('click', () => {
+          // Swallow the rejection when a pending play() is interrupted by
+          // navigating away mid-tap.
+          if (audio.paused) { const p = audio.play(); if (p) p.catch(() => {}); }
+          else audio.pause();
+        });
         audio.addEventListener('play', () => wrap.classList.add('playing'));
         audio.addEventListener('pause', () => wrap.classList.remove('playing'));
         audio.addEventListener('ended', () => wrap.classList.remove('playing'));
