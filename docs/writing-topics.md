@@ -15,6 +15,7 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - What My Cat Taught Me About Control *(control × autonomy; giving up control on purpose; Oona)*
 - Who Applies the Brakes *(reliability as a cultural problem; the 20% rule; the brake is a person)*
 - Liked or Trusted *(the PM as container vs mirror; coverage isn't presence; how the brake gets applied)*
+- What Survives a Summary *(specificity as the thing that can't be produced on demand; novelty is a supply problem; Carlo in the park)*
 - How Was Your Weekend *(ethical gossip; holding the mirror without fusing; moon or sun)*
 - Held With Confidence, Never Rigidity *(roadmaps as sequenced hypotheses)*
 - Building AI agents at Cloudflare · Rory Sutherland / product decisions · DNS security for PMs · Valentine's Day / Oona
@@ -36,7 +37,6 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - **Reading the same book four times** — depth over novelty in an AI-flooded feed.
 - **The self that forms when no one is watching** — writing to become the person who writes; being seen vs. expressing regardless. *(straight from your own words — this one is yours)*
 - **Validation hunger** — the honest essay about wanting to be seen, and writing anyway.
-- **What survives a summary** — when summarising is free, the only thing with value is what a summary destroys: a specific voice, a lived quarter, a metaphor that reorganises how someone sees their job. The word is **specificity**, and it's the whole argument. Novelty is a supply problem and the supply went infinite; specificity can't be produced on demand, because it needs someone to have actually been somewhere. Started as your own worry that nobody reads long essays anymore. *(your live question — write it while it's still bothering you)*
 - **I liked the picture, not the post** — you catch yourself scrolling: photo, one line of the title, like, move on. Never read a word. So a like is not evidence anyone read anything, and the whole engagement layer is measuring scroll-stopping, not writing. The essay only works if you keep yourself inside it and don't write it from above. Pairs with *What survives a summary*. *(from your own honest account of how you use LinkedIn, 2026-07-29)*
 - **Not all motion is progress** — the note on your board, the zigzagging org, and the difference between moving and going somewhere. Pulls the thread *Brakes* only had room to touch.
 
