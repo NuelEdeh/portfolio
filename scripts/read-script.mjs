@@ -38,12 +38,32 @@ if (!slug) {
   process.exit(1);
 }
 
-const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/content.json'), 'utf8'));
-const post = (data.posts || []).find((p) => p.slug === slug);
-if (!post) {
-  console.error(`no post with slug "${slug}"`);
-  console.error('available: ' + (data.posts || []).map((p) => p.slug).join(', '));
-  process.exit(1);
+/* Source is normally the published content.json, but --draft <path> reads an
+   unpublished draft instead: everything after the first `---` line is the body,
+   and the `# Title` heading is the title. Lets an essay be rehearsed and recorded
+   before it ships. */
+const draftPath = flag('draft', null);
+let post;
+if (draftPath) {
+  const raw = fs.readFileSync(draftPath, 'utf8');
+  const i = raw.indexOf('\n---\n');
+  if (i === -1) {
+    console.error(`${draftPath}: expected a "---" line separating front matter from the body`);
+    process.exit(1);
+  }
+  const titleMatch = raw.slice(0, i).match(/^#\s+(?:DRAFT\s*[—-]\s*)?(.+)$/m);
+  post = {
+    title: (titleMatch ? titleMatch[1] : path.basename(draftPath, '.md')).trim(),
+    body: raw.slice(i + 5).trim(),
+  };
+} else {
+  const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/content.json'), 'utf8'));
+  post = (data.posts || []).find((p) => p.slug === slug);
+  if (!post) {
+    console.error(`no post with slug "${slug}"`);
+    console.error('available: ' + (data.posts || []).map((p) => p.slug).join(', '));
+    process.exit(1);
+  }
 }
 
 /* Strip link syntax to its text; keep emphasis, convert highlights to *…*. */
