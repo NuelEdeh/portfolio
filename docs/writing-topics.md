@@ -16,6 +16,7 @@ of decisions on the other. The pieces that land fuse both. Let the personal ones
 - Who Applies the Brakes *(reliability as a cultural problem; the 20% rule; the brake is a person)*
 - Liked or Trusted *(the PM as container vs mirror; coverage isn't presence; how the brake gets applied)*
 - What Survives a Summary *(specificity as the thing that can't be produced on demand; novelty is a supply problem; Carlo in the park)*
+- Use Me *(a friend's question; use vs abuse, prey and predator; the Gallup afternoon; the ones who let me; first essay narrated in Nuel's own voice)*
 - How Was Your Weekend *(ethical gossip; holding the mirror without fusing; moon or sun)*
 - Held With Confidence, Never Rigidity *(roadmaps as sequenced hypotheses)*
 - Building AI agents at Cloudflare · Rory Sutherland / product decisions · DNS security for PMs · Valentine's Day / Oona
