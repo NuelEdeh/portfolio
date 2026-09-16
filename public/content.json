@@ -21,73 +21,23 @@
     ],
     "paragraph": "An engineer's rigor with a writer's eye. Six years turning hard, systemic problems into products people trust. I ship, I scale, and I write my way through the thinking."
   },
-  "stats": [
-    {
-      "count": 2.3,
-      "decimals": 1,
-      "unit": "×",
-      "meter": 82,
-      "label": "ARR growth",
-      "context": "Cloudflare · in under two years"
-    },
-    {
-      "count": 80,
-      "decimals": 0,
-      "unit": "B",
-      "meter": 100,
-      "label": "Daily DNS events",
-      "context": "Gateway DNS · at peak, and climbing",
-      "live": true
-    },
-    {
-      "count": 4.6,
-      "decimals": 1,
-      "prefix": "$",
-      "tail": "M",
-      "meter": 64,
-      "label": "Enterprise TCV sponsored",
-      "context": "Enterprise · government · Fortune 500"
-    }
-  ],
   "aboutLead": "I'm happiest where rigor meets curiosity. At Cloudflare I owned the full DNS Security portfolio: threat intelligence, L3–L7 inspection, policy enforcement, and Zero Trust access. Grew ARR 2.3× while scaling to 60–80B daily events.",
   "about": "AI-native by practice: I shipped a production MCP agent and architected a second. I connect work across teams, surface architectural risk, and drive alignment from engineering to the C-suite. People describe me as calm, curious, and a little relentless. I think a lot about why people decide the way they do (I've read Rory Sutherland's Alchemy four times).",
-  "skills": [
-    "Platform & Systems Thinking",
-    "AI Agent Design (MCP / LLMs)",
-    "Zero Trust / Network Security",
-    "FedRAMP & Compliance",
-    "0→1 Product Delivery",
-    "Enterprise GTM",
-    "Behavioural Product Design"
-  ],
   "experience": [
     {
       "company": "Cloudflare",
-      "role": "Product Manager · DNS Security & Secure Web Gateway",
-      "period": "Feb 2024 — Jan 2026",
-      "summary": "Owned DNS Filtering & SWG — the Zero Trust on-ramp processing 60–80B daily events across enterprise, ISP, and SMB — from strategy through delivery.",
-      "highlights": [
-        "Grew ARR 2.3× in under two years; scaled Gateway DNS from ~35B to 60–80B requests/day via 20+ enterprise launches.",
-        "Shipped a production MCP knowledge agent — flagged by a senior technical leader as a flagship example — and architected a second for real-time customer intelligence.",
-        "Delivered FedRAMP High uplift across product lines; sponsored $4.6M TCV in named enterprise, government & Fortune 500 deals."
-      ]
+      "period": "2024 — 2026",
+      "story": "For two years I owned the front door of Cloudflare's Zero Trust platform, the DNS layer that answers **80 billion questions a day**. It handled 35 billion when I picked it up. I grew the business **2.3× in under two years**, shipped twenty-plus enterprise launches, carried a FedRAMP High uplift across product lines, and sponsored **$4.6M in deals** for governments and Fortune 500s. Somewhere in the middle I shipped a production MCP agent that a senior technical leader called a flagship example. Then I wrote about all of it."
     },
     {
       "company": "Neat",
-      "role": "Co-founder & Head of Product · Developer Tools",
-      "period": "May 2020 — Jan 2024",
-      "summary": "Co-founded a GitHub notifications manager for developers. Built 0→1, owned product, GTM, and dev relations.",
-      "highlights": [
-        "Scaled to 3.96K+ DAUs with a 10× increase in engagement; 5× retention improvement.",
-        "Generated $120K+ in development-services revenue; shipped GitHub & Linear integrations."
-      ]
+      "period": "2020 — 2024",
+      "story": "Before that I co-founded Neat, a GitHub notifications manager. Four years of zero to one: product, go-to-market, developer relations, all of it. By the end, **nearly 4,000 developers** opened it every day, engagement had grown ten times over, and the work paid for itself in services revenue. Mostly it taught me what it costs to build something people reach for every morning."
     },
     {
       "company": "PwC Canada",
-      "role": "Senior Consultant · Risk Assurance",
-      "period": "Sep 2020 — Feb 2023",
-      "summary": "Led a 5-person team delivering cybersecurity risk assessments for 9 enterprise clients; drove $360K annual savings through compliance automation.",
-      "highlights": []
+      "period": "2020 — 2023",
+      "story": "At PwC I led a five-person team through cybersecurity risk assessments for nine enterprise clients, and automated enough compliance work to save **$360K a year**. Consulting taught me to walk into rooms I didn't control and leave with a decision."
     }
   ],
   "posts": [

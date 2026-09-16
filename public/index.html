@@ -151,19 +151,6 @@
     }
     .hero-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
 
-    .hero-availability {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted-2);
-      margin-bottom: 36px;
-    }
-    .hero-availability .dot { width: 7px; height: 7px; }
-
     .hero-eyebrow { margin-bottom: 20px; font-size: 12px; letter-spacing: 0.14em; }
 
     .hero-name {
@@ -217,81 +204,6 @@
     .btn-secondary { border: 1px solid var(--line-btn); color: var(--ink); }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ============================================================
-       LIVING NUMBERS
-       ============================================================ */
-    #impact { padding: 0 var(--pad-x) clamp(3.5rem, 8vw, 84px); }
-    .impact-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 26px;
-      max-width: var(--maxw);
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .impact-head .label {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted-2);
-    }
-    .impact-head .live {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.06em;
-      color: var(--signal);
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--line-strong);
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-    .stat { padding: 30px 32px; border-right: 1px solid var(--line-soft); transition: background 0.2s; }
-    .stat:first-child { padding-left: 0; }
-    .stat:last-child { padding-right: 0; border-right: none; }
-    .stat:hover { background: rgba(181, 80, 46, 0.04); }
-    .stat-value {
-      display: flex;
-      align-items: baseline;
-      font-family: var(--serif);
-      font-optical-sizing: auto;
-      font-weight: 300;
-      font-size: clamp(3rem, 7vw, 76px);
-      letter-spacing: -0.03em;
-      line-height: 0.9;
-      font-variant-numeric: tabular-nums;
-    }
-    .stat-value .accent { color: var(--accent); }
-    .stat-meter { height: 3px; border-radius: 2px; background: rgba(26, 26, 24, 0.1); margin: 22px 0 16px; overflow: hidden; }
-    .stat-meter > span {
-      display: block;
-      height: 100%;
-      background: var(--accent);
-      transform-origin: left;
-      transform: scaleX(0);
-    }
-    .stat-meter.grown > span { animation: grow 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-    .stat-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .stat-context { font-family: var(--mono); font-size: 10.5px; color: var(--muted-2); margin-top: 5px; }
-
-    @media (max-width: 720px) {
-      .stats-grid { grid-template-columns: 1fr; }
-      .stat { padding: 26px 0 !important; border-right: none; border-bottom: 1px solid var(--line-soft); }
-      .stat:last-child { border-bottom: none; }
-    }
 
     /* ============================================================
        SHARED SECTION (two-column: label | content)
@@ -329,16 +241,6 @@
     }
     .about-body { font-size: 15px; line-height: 1.8; color: var(--muted); max-width: 660px; margin-bottom: 34px; }
     .about-body em, .about-lead em { font-style: italic; color: var(--accent); }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 6px 13px;
-      border: 1px solid var(--line-strong);
-      border-radius: 2px;
-      color: var(--ink-4);
-    }
-
     /* ── SELECTED WORK ── */
     .work-item { padding-bottom: 34px; border-bottom: 1px solid var(--line); margin-bottom: 34px; }
     .work-item:last-child { padding-bottom: 0; border-bottom: none; margin-bottom: 0; }
@@ -348,6 +250,8 @@
     .work-role { font-size: 15px; font-weight: 500; color: var(--ink-3); margin-bottom: 14px; }
     .work-summary { font-size: 14.5px; line-height: 1.7; color: var(--muted); max-width: 640px; margin-bottom: 16px; }
     .work-summary:last-child { margin-bottom: 0; }
+    .work-story { font-size: 15.5px; max-width: 660px; }
+    .work-story strong { color: var(--accent); font-weight: 600; }
     .work-highlights { display: flex; flex-direction: column; gap: 9px; }
     .work-highlight { display: flex; gap: 12px; font-size: 13.5px; line-height: 1.55; color: var(--ink-4); }
     .work-highlight::before { content: '→'; color: var(--accent); flex-shrink: 0; }
@@ -811,8 +715,8 @@
     <a href="#top" class="nav-name" onclick="closeReader()">Nuel&nbsp;Edeh</a>
     <div class="nav-links">
       <a href="#about" onclick="closeReader()">About</a>
-      <a href="#work" onclick="closeReader()">Work</a>
       <a href="#writing" onclick="closeReader()">Writing</a>
+      <a href="#work" onclick="closeReader()">Work</a>
       <a href="#contact" class="contact-link" onclick="closeReader()">Contact</a>
       <span class="nav-clock"><span class="dot blink"></span><span class="clock-city">Toronto&nbsp;</span><span id="clock">--:--:--</span></span>
     </div>
@@ -826,10 +730,6 @@
     <section id="hero">
       <div class="glow"></div>
       <div class="hero-inner">
-        <div class="hero-availability" id="hero-availability">
-          <span class="dot pulse glow"></span>
-          <span id="availability-text"></span>
-        </div>
         <div class="eyebrow hero-eyebrow" id="hero-eyebrow"></div>
         <h1 class="hero-name" id="hero-name"></h1>
         <div class="hero-typed"><span id="typed"></span><span class="cursor">|</span></div>
@@ -841,15 +741,6 @@
       </div>
     </section>
 
-    <!-- IMPACT / LIVING NUMBERS -->
-    <section id="impact">
-      <div class="impact-head">
-        <div class="label">Impact — measured</div>
-        <div class="live"><span class="dot pulse"></span>live</div>
-      </div>
-      <div class="stats-grid" id="stats-grid"></div>
-    </section>
-
     <!-- ABOUT -->
     <section id="about" class="section">
       <div class="section-grid">
@@ -857,16 +748,7 @@
         <div>
           <p class="about-lead fade" id="about-lead"></p>
           <p class="about-body fade" id="about-body"></p>
-          <div class="chips fade" id="skills"></div>
         </div>
-      </div>
-    </section>
-
-    <!-- SELECTED WORK -->
-    <section id="work" class="section">
-      <div class="section-grid">
-        <div class="section-num">02 / Selected Work</div>
-        <div id="work-list"></div>
       </div>
     </section>
 
@@ -874,13 +756,21 @@
     <section id="writing">
       <div class="section-grid">
         <div>
-          <div class="writing-num">03 / Writing</div>
+          <div class="writing-num">02 / Writing</div>
           <div class="writing-note" id="writing-note">Half of how I think shows up here first. A growing archive — new essays land often.</div>
         </div>
         <div>
           <div id="featured-slot"></div>
           <div class="posts-grid" id="posts-grid"></div>
         </div>
+      </div>
+    </section>
+
+    <!-- WORK, TOLD PROPERLY -->
+    <section id="work" class="section">
+      <div class="section-grid">
+        <div class="section-num">03 / Work, told properly</div>
+        <div id="work-list"></div>
       </div>
     </section>
 
@@ -1023,27 +913,15 @@
       const meta = data.meta || {};
       const hero = data.hero || {};
 
-      // Availability
-      if (meta.openToWork && meta.availability) {
-        document.getElementById('availability-text').textContent = meta.availability;
-      } else {
-        document.getElementById('hero-availability').style.display = 'none';
-      }
-
       // Hero
       document.getElementById('hero-eyebrow').textContent = meta.eyebrow || meta.title || '';
       const nameEl = document.getElementById('hero-name');
       nameEl.innerHTML = esc(hero.name || meta.name || '') + ' <em>' + esc(hero.nameAccent || '') + '</em>';
       document.getElementById('hero-para').textContent = hero.paragraph || '';
 
-      // Stats
-      renderStats(data.stats || []);
-
       // About
       document.getElementById('about-lead').textContent = data.aboutLead || '';
       renderAboutBody(data.about || '');
-      const skills = document.getElementById('skills');
-      (data.skills || []).forEach(s => skills.appendChild(el('span', 'chip', s)));
 
       // Work
       renderWork(data.experience || []);
@@ -1075,66 +953,6 @@
       document.getElementById('about-body').innerHTML = html;
     }
 
-    function renderStats(stats) {
-      const grid = document.getElementById('stats-grid');
-      grid.innerHTML = '';
-      let liveNode = null;
-
-      stats.forEach((s) => {
-        const cell = el('div', 'stat');
-
-        const val = el('div', 'stat-value');
-        if (s.prefix) val.appendChild(el('span', 'accent', s.prefix));
-        const num = el('span', null, (0).toFixed(s.decimals || 0));
-        val.appendChild(num);
-        if (s.unit) val.appendChild(el('span', 'accent', s.unit));
-        if (s.tail) val.appendChild(el('span', null, s.tail));
-        cell.appendChild(val);
-
-        const meter = el('div', 'stat-meter');
-        const fill = el('span');
-        fill.style.width = (s.meter != null ? s.meter : 100) + '%';
-        meter.appendChild(fill);
-        cell.appendChild(meter);
-
-        cell.appendChild(el('div', 'stat-label', s.label || ''));
-        if (s.context) cell.appendChild(el('div', 'stat-context', s.context));
-        grid.appendChild(cell);
-
-        if (REDUCE_MOTION) {
-          num.textContent = Number(s.count).toFixed(s.decimals || 0);
-          fill.style.transform = 'scaleX(1)';
-        } else {
-          countUp(num, Number(s.count), s.decimals || 0, 1700);
-          requestAnimationFrame(() => meter.classList.add('grown'));
-        }
-
-        if (s.live) liveNode = num;
-      });
-
-      if (!REDUCE_MOTION && liveNode) {
-        setTimeout(() => tickLive(liveNode), 2600);
-      }
-    }
-
-    function countUp(node, target, decimals, dur) {
-      const start = performance.now();
-      function step(now) {
-        const p = Math.min(1, (now - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        node.textContent = (target * eased).toFixed(decimals);
-        if (p < 1) requestAnimationFrame(step);
-        else node.textContent = target.toFixed(decimals);
-      }
-      requestAnimationFrame(step);
-    }
-
-    function tickLive(node) {
-      const v = 77.6 + Math.random() * 3.8;
-      node.textContent = v.toFixed(1);
-      setTimeout(() => tickLive(node), 1500 + Math.random() * 1700);
-    }
-
     function renderWork(list) {
       const wrap = document.getElementById('work-list');
       wrap.innerHTML = '';
@@ -1145,7 +963,13 @@
         if (job.period) top.appendChild(el('span', 'work-period', job.period.toUpperCase()));
         item.appendChild(top);
         if (job.role) item.appendChild(el('div', 'work-role', job.role));
-        if (job.summary) item.appendChild(el('p', 'work-summary', job.summary));
+        if (job.story) {
+          const p = el('p', 'work-summary work-story');
+          p.innerHTML = mdInline(job.story);
+          item.appendChild(p);
+        } else if (job.summary) {
+          item.appendChild(el('p', 'work-summary', job.summary));
+        }
         if (job.highlights && job.highlights.length) {
           const hl = el('div', 'work-highlights');
           job.highlights.forEach(h => hl.appendChild(el('div', 'work-highlight', h)));
